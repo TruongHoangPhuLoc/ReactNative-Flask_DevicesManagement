@@ -1,20 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View,StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-const dbuser = {name:'admin',password:'admin'}
+import {fetchData} from '../main'
 
 
-const LoginView = ({
-    fetchData,
-}) => {
+const LoginView = ({navigation}) => {
 
     const [username,setUsername] = React.useState('');
     const [password,setPassword] = React.useState('');
-    const [user,setUser] = React.useState({});
-    const validCheck = async () => {
-        const res = await fetch('http://localhost:5000/users');
-        const data = await res.json();
-        console.log(JSON.parse(data));
+    const [dbuser,setDbser] = React.useState({});
+    const [text,setText] = React.useState('');
+    useEffect(() => {
+        const getUsers = async () =>{
+            const users = await fetchData('http://localhost:5000/users')
+            setDbser(users);
+        }
+        getUsers();
+    },[])
+    const validCheck = () => {
+        let isSuccessfulLogin = false;
+        dbuser.map((element) =>{
+            if(element['name'] == username && element['password'] == password)
+            {
+                // console.log('TRUE');
+                // navigation.navigate('Home');
+                isSuccessfulLogin = true;
+                setUsername('');
+                setPassword('');
+                setText('');
+            }
+        })
+        if(isSuccessfulLogin == false)
+        {
+            alert('Incorrect Username or Password');
+        }
      }
     return(
     <View style={styles.containerLogin}>
@@ -27,12 +46,15 @@ const LoginView = ({
                     <Ionicons name="person-circle" size={40}/>
                     <TextInput placeholder='username' style={styles.inputText} onChangeText={(e) =>{
                         setUsername(e);
-                    }} />
+                        setText(e);
+                    }}/>
             </View>
             <View style ={styles.inputForm}>
                 <Ionicons  name="lock-closed" size={40}></Ionicons>
                 <TextInput placeholder='password' secureTextEntry='true' style={styles.inputText} onChangeText= {(e)=>{
                     setPassword(e);
+                    setText(e);
+                    
 
             }}/>
             </View>

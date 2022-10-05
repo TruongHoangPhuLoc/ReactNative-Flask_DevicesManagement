@@ -14,5 +14,5 @@ def Home():
 @View.route("/users")
 def getUser():
     res = db.fetchData('Test','users')
-    #data = json.dumps(res,default=str)
-    return jsonify(res)
+    data = json.dumps(res,default=str)
+    return jsonify(data)
