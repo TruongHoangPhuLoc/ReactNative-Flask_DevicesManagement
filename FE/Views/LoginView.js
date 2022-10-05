@@ -5,17 +5,16 @@ const dbuser = {name:'admin',password:'admin'}
 
 
 const LoginView = ({
-    params,
+    fetchData,
 }) => {
 
     const [username,setUsername] = React.useState('');
     const [password,setPassword] = React.useState('');
     const [user,setUser] = React.useState({});
-    const validCheck = () => {
-        if(username === dbuser.name && password === dbuser.password)
-        {
-            console.log("True");
-        }
+    const validCheck = async () => {
+        const res = await fetch('http://localhost:5000/users');
+        const data = await res.json();
+        console.log(JSON.parse(data));
      }
     return(
     <View style={styles.containerLogin}>

@@ -12,4 +12,4 @@ def fetchData(database,collection):
 
 
 data = fetchData('Test','users')
-print(type(data[0]['_id']))
+print(data[0])

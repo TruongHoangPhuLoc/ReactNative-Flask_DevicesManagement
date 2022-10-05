@@ -3,9 +3,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import LoginView from './Views/LoginView';
 
 export default function App() {
+
+  const fetchData = async(url) => {
+    const result = await fetchData(url);
+    const data = await result.json();
+    return data;
+  }
   return (
     <View style={styles.container}>
-      <LoginView/>
+      <LoginView />
       <StatusBar style="auto" />
     </View>
   );

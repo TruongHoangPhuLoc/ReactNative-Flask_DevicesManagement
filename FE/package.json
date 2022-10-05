@@ -2,6 +2,7 @@
   "name": "devicesmanagement",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
+  "proxy":"http://localhost:5000/users",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -22,4 +23,5 @@
     "@babel/core": "^7.12.9"
   },
   "private": true
+  
 }
