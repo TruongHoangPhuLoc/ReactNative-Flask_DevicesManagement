@@ -3,7 +3,7 @@ import { Text, View,StyleSheet, TextInput, TouchableOpacity } from 'react-native
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import {fetchData} from '../main'
 
-
+///advanced task: clear TextInput after signing in
 const LoginView = ({navigation}) => {
 
     const [username,setUsername] = React.useState('');
@@ -22,12 +22,9 @@ const LoginView = ({navigation}) => {
         dbuser.map((element) =>{
             if(element['name'] == username && element['password'] == password)
             {
-                // console.log('TRUE');
-                // navigation.navigate('Home');
+                console.log('TRUE');
+                navigation.navigate('Home');
                 isSuccessfulLogin = true;
-                setUsername('');
-                setPassword('');
-                setText('');
             }
         })
         if(isSuccessfulLogin == false)
@@ -46,14 +43,14 @@ const LoginView = ({navigation}) => {
                     <Ionicons name="person-circle" size={40}/>
                     <TextInput placeholder='username' style={styles.inputText} onChangeText={(e) =>{
                         setUsername(e);
-                        setText(e);
+                      
                     }}/>
             </View>
             <View style ={styles.inputForm}>
                 <Ionicons  name="lock-closed" size={40}></Ionicons>
                 <TextInput placeholder='password' secureTextEntry='true' style={styles.inputText} onChangeText= {(e)=>{
                     setPassword(e);
-                    setText(e);
+                   
                     
 
             }}/>
